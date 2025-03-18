@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     float inputDirection;
     [SerializeField] float movementSpeed = 1;
+    [SerializeField] float jumpForce = 1;
 
     void Start()
     {
@@ -25,10 +26,21 @@ public class PlayerMovement : MonoBehaviour
     private void TakeInput()
     {
         inputDirection = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayerJump();
+        }
     }
 
     private void MovePlayer()
     {
         rb.linearVelocity = new Vector2(inputDirection * movementSpeed, rb.linearVelocityY);
+    }
+
+    private void PlayerJump()
+    {
+        rb.linearVelocityY = 0;
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }
