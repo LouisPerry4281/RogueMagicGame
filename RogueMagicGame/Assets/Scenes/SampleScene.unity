@@ -533,6 +533,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   jumpForce: 15
+  isGroundedDistance: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!4 &668632306
 Transform:
   m_ObjectHideFlags: 0
@@ -560,7 +564,7 @@ GameObject:
   - component: {fileID: 1029896175}
   - component: {fileID: 1029896174}
   - component: {fileID: 1029896173}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

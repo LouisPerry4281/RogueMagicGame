@@ -5,8 +5,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
 
     float inputDirection;
+
+    [Header("Movement Variables")]
     [SerializeField] float movementSpeed = 1;
     [SerializeField] float jumpForce = 1;
+
+    [Header("Grounded")]
+    [SerializeField] float isGroundedDistance = 0.6f;
+    [SerializeField] LayerMask groundLayer;
 
     void Start()
     {
@@ -27,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         inputDirection = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             PlayerJump();
         }
@@ -42,5 +48,18 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.linearVelocityY = 0;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private bool IsGrounded()
+    {
+        if (Physics2D.Raycast(transform.position, -transform.up, isGroundedDistance, groundLayer))
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
     }
 }
